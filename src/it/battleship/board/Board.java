@@ -10,7 +10,6 @@ public class Board {
     private final int length; //one variable for rows = columns = 10 [10x10 matrix]
     private char[][] board;
     private int numShips = 0;
-    private int numHits = 0;
     public static final char HIT = '☒';
     public static final char MISS = '☸';
     public static final char SHIP = '☐';
@@ -20,6 +19,7 @@ public class Board {
         this.length = length;
         board = initBoard();
     }
+
     public Board(char[][] matrix){
         this.length = matrix.length;
         board = matrix;
@@ -36,9 +36,11 @@ public class Board {
     public int getLength() {
         return length;
     }
+
     public int getNumShips() {
         return numShips;
     }
+
     public char[][] getBoard() {
         return board;
     }
@@ -46,29 +48,27 @@ public class Board {
     public char at(Position position) {
         return board[position.getRow()][position.getColumn()];
     }
+
     public boolean set(char status, Position position) {
         board[position.getRow()][position.getColumn()] = status;
         return true;
     }
 
-    /**
-     * Metodo per controllare se in una posizione specifica è presente una nave
-     * @param position Posizione della nave
-     * @return Valore booleano se è presente una nave in una posizione specifica
-     */
     public boolean thereIsShip(Position position) {
         return at(position) == SHIP;
     }
+
     public boolean thereIsWater(Position position) {
         return at(position) == WATER;
     }
+
     public boolean thereIsMiss(Position position){
         return at(position) == MISS;
     }
+
     public boolean thereIsHit(Position position){
         return at(position) == HIT;
     }
-
 
     public boolean thereIsSpace(Ship ship) {
         int l = ship.getLength();
@@ -77,6 +77,7 @@ public class Board {
         if (ship.getDirection() == Direction.HORIZONTAL) return (length - y + 1) > l;
         else return (length - x + 1) > l;
     }
+
     public boolean isNearShip(Ship ship) throws PositionException {
         int k, row, column;
         row = ship.getPosition().getRow();
@@ -93,6 +94,7 @@ public class Board {
         }
         return false;
     }
+
     private boolean isShipAround(int row, int column) throws PositionException {
         if (row - 1 >= 0){
             if(thereIsShip(new Position(row - 1, column))) return true;
@@ -116,7 +118,7 @@ public class Board {
             if(thereIsShip(new Position(row, column + 1))) return true;
         }
         if (row - 1 >= 0 && column + 1 < length){
-            if(thereIsShip(new Position(row - 1, column + 1))) return true;
+            return thereIsShip(new Position(row - 1, column + 1));
         }
         return false;
     }
@@ -137,27 +139,24 @@ public class Board {
                             if (i == 0) k = row;
                             board[row + i][column] = SHIP;
                         }
+                        numShips++;
                     }
-                    numShips++;
                     return true;
                 }
                 else throw new BoardException("Errore, un'altra nave si trova nelle vicinanze");
             }
             else throw new BoardException("Errore, non c'è spazio per quella nave con quella direzione");
         }
-        else throw new BoardException("Errore, è già una nave in quella posizione");
+        else throw new BoardException("Errore, c'è già una nave in quella posizione");
     }
 
     public boolean addHit(Position position) throws BoardException {
         if (thereIsShip(position)) {
-            numHits++;
+            numShips--;
             return set(HIT, position);
         }
         else if (thereIsWater(position)) return set(MISS, position);
         else throw new BoardException("Errore, hai già sparato in questa posizione");
-    }
-    public int countHits(){
-        return numHits;
     }
 
     public Board getBoardHideShips() throws PositionException{

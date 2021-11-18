@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
-    private final String name;
+    private String name;
     private final Board board;
     private boolean isCPU;
 
@@ -20,11 +20,19 @@ public class Player {
         board = new Board(10);
         isCPU = false;
     }
+
     public Player(String name, boolean isCPU){
         this.name = name;
         board = new Board(10);
         this.isCPU = isCPU;
     }
+
+    public Player(){
+        this.name = randName();
+        board = new Board(10);
+        isCPU = true;
+    }
+
     public Player(boolean isCPU){
         this.name = randName();
         board = new Board(10);
@@ -40,6 +48,7 @@ public class Player {
         }
         return list;
     }
+
     private String randName(){
         Random rand = new Random();
         String letters = "abcdefghiljkmnopqrstuvwxyz";
@@ -52,9 +61,14 @@ public class Player {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
+
     public Board getBoard() {
         return board;
     }
@@ -62,6 +76,7 @@ public class Player {
     public void setIsCPU(boolean CPU) {
         isCPU = CPU;
     }
+
     public boolean isCPU(){
         return isCPU;
     }
@@ -99,6 +114,7 @@ public class Player {
             Display.printBoard(board);
         }else randAddAllShips();
     }
+
     private void randAddAllShips(){
         Random random = new Random();
         ArrayList<Ship> list = initShips();
@@ -122,17 +138,17 @@ public class Player {
                 if (!isAdded) deadlock++;
                 if (deadlock > limit) {
                     reset();
-                    i = 0;
+                    i = -1;
                     break;
                 }
             } while (!isAdded);
-            //printBoard();
         }
     }
 
     public boolean hasShipsLive(){
-        return board.countHits() != ShipType.lengthAllShips();
+        return board.getNumShips() > 0;
     }
+
     private int countShip(ArrayList<Ship> ships, int length){
         int count = 0;
         for (Ship ship: ships){
@@ -140,13 +156,15 @@ public class Player {
         }
         return count;
     }
+
     public int shipsLeft(){
-        return ShipType.lengthAllShips() - board.countHits();
+        return board.getNumShips();
     }
 
     public boolean addHit(Position pos) throws BoardException {
         return board.addHit(pos);
     }
+
      public Position randShot() throws PositionException {
         Random random = new Random();
         int x = random.nextInt(board.getLength());

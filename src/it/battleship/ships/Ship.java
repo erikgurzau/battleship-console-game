@@ -35,6 +35,7 @@ public class Ship {
     public Position getPosition() {
         return position;
     }
+
     public void setPosition(Position position) {
         this.position = position;
     }
@@ -42,6 +43,7 @@ public class Ship {
     public Direction getDirection() {
         return direction;
     }
+    
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
@@ -51,6 +53,6 @@ public class Ship {
     }
 
     public String toString(){
-        return name + ";" + length + ";" + position.toString() + ";" + direction;
+        return name + ";" + length; /*+ ";" + (position.toString()) + ";" + direction;*/
     }
 }

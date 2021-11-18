@@ -34,8 +34,6 @@ public class Main {
                     }
                     case 3 -> {
                         Display.printRules();
-                        System.out.print("\nPremi un tasto per continuare...");
-                        sc.nextLine();
                     }
                 }
             } while (opt != 0);

@@ -66,6 +66,9 @@ public class Display {
                 "- (" + DisplayColors.ANSI_YELLOW + Board.SHIP + DisplayColors.ANSI_WHITE + ")\t: Nave\n" +
                 "- (" + DisplayColors.ANSI_RED + Board.HIT + DisplayColors.ANSI_WHITE + ")\t: Nave colpita\n" +
                 "- (" + DisplayColors.ANSI_WHITE + Board.MISS + DisplayColors.ANSI_WHITE + ")\t: Colpo mancato\n");
+
+        System.out.print("\nPremi un tasto per continuare...");
+        new Scanner(System.in).nextLine();
     }
 
     public static void printCredits(){
@@ -85,6 +88,8 @@ public class Display {
 
     public static void printWinner(Player player){
         System.out.println(DisplayColors.ANSI_BLUE + "\n✔ " + player.getName() + " ha vinto!" + DisplayColors.ANSI_RESET + "\n");
+        System.out.print("\nPremi un tasto per continuare...");
+        new Scanner(System.in).nextLine();
     }
     
     public static void printCurrentShip(Ship ship, int numShipLeft){

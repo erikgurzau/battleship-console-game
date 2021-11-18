@@ -55,7 +55,6 @@ public class BattleshipGame {
         else Display.printWinner(pTwo);
     }
 
-
     public void run() throws PositionException {
         addAllShips();
         while (turn(pOne, pTwo) && turn(pTwo, pOne)){ }
