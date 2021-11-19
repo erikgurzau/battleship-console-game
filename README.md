@@ -26,3 +26,9 @@ After typing '1', you will be asked the name (only 1 time) and you will be able 
 The game rules are all explained in detail in point '3' of the menu.
 
 ![data](./media/screenshot_playerboard.png)
+
+### Feedback
+If you have any feedback, please reach out to us at gurzau10@gmail.com
+
+### License
+[MIT](https://choosealicense.com/licenses/mit/)
