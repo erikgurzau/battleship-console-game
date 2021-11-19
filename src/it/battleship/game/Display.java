@@ -26,7 +26,7 @@ public class Display {
 
     public static int printMenu(){
         printTitle();
-        System.out.println("\nBenvenuto nel gioco Battaglia Navale! Scegli una voce nel menu per continuare... ");
+        //System.out.println("\nBenvenuto nel gioco Battaglia Navale! Scegli una voce nel menu per continuare... ");
         System.out.println("\n(1) - Inizia a giocare");
         System.out.println("(2) - Simula partita");
         System.out.println("(3) - Regole e legenda");

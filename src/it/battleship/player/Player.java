@@ -165,15 +165,15 @@ public class Player {
         return board.addHit(pos);
     }
 
-     public Position randShot() throws PositionException {
+     public Position randShoot() throws PositionException {
         Random random = new Random();
         int x = random.nextInt(board.getLength());
         int y = random.nextInt(board.getLength());
         return new Position(x, y);
     }
 
-    public Position shot() throws PositionException {
-        if (isCPU) return randShot();
+    public Position shoot() throws PositionException {
+        if (isCPU) return randShoot();
         else {
             Scanner sc = new Scanner(System.in);
             return Input.readPosition(sc, board,  "- " + name + ", dove vuoi sparare? ");

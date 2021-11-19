@@ -26,7 +26,7 @@ public class BattleshipGame {
         if (attack.hasShipsLive()){
             do {
                 try {
-                    shot = attack.shot();
+                    shot = attack.shoot();
                     isAddHit = defend.addHit(shot);
                 } catch (BoardException e) {
                     if (!attack.isCPU()) Display.printError("Errore, hai già sparato in questa posizione!");
