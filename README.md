@@ -19,3 +19,10 @@ When you start the game the following menu appears on the home screen
   * Type '2' to simulate a computer vs computer game 10x10
   * Type '3' to see the rules and legend
   * Type '0' to exit
+
+### Place your ships
+
+After typing '1', you will be asked the name (only 1 time) and you will be able to start placing your ships.
+The game rules are all explained in detail in point '3' of the menu.
+
+![data](./media/screenshot_playerboard.png)
