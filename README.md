@@ -23,7 +23,8 @@ When you start the game the following menu appears on the home screen
 ### Place your ships
 
 To place a ship you need to enter a departure coordinate (A1-J10 for the default 10x10 board) and a direction (vertical or horizontal).
-- For example: A1 and H or B7 and V. 
+- For example: "A1" and 'H' or "B7" and 'V'. 
+
 Ships shall not overlap or be adjacent and shall remain within the boundaries of the edge.
 
 ![data](./media/screenshot_playerboard.png)
