@@ -20,6 +20,12 @@ When you start the game the following menu appears on the home screen
   * Type '3' to see the rules and legend
   * Type '0' to exit
 
+### How to win
+  - Each player has a battlefield represented by a 10x10 grid (default) on which he places 8 ships, hidden from his opponent.
+  - The goal of the game is to sink all the opposing ships! A ship is sunk when it is hit once for each space it occupies.
+  - In other words, a submarine, which occupies two spaces, is sunk after being hit twice.
+  - The 8 ships occupy 25 total spaces, so the first player to record 25 hits wins!
+
 ### Place your ships
 
 To place a ship you need to enter a departure coordinate (A1-J10 for the default 10x10 board) and a direction (vertical or horizontal).
