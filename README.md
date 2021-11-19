@@ -31,8 +31,9 @@ Ships shall not overlap or be adjacent and shall remain within the boundaries of
 
 
 ### Shoot the enemy ships
-![addShips](./media/screenshot_playershoot.png)
-![addShips](./media/screenshot_boards.png)
+![playerShoot](./media/screenshot_playershoot.png)
+
+![playerBoards](./media/screenshot_boards.png)
 
 ### Feedback
 If you have any feedback, please reach out to us at gurzau10@gmail.com
