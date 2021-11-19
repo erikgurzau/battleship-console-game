@@ -47,6 +47,8 @@ Once both players have configured their ships, the battle may have started!
 ![playerBoards](./media/screenshot_boards.png)
 
 ### End game
+This is a possible scenario of an end game. 
+The rules and legend of the symbols are explained in detail in point 3 of the menu. Consult anytime if you have any doubts.
 
 ![endGame](./media/screenshot_endgame.png)
 
