@@ -31,6 +31,11 @@ Ships shall not overlap or be adjacent and shall remain within the boundaries of
 
 
 ### Shoot the enemy ships
+Once both players have configured their ships, the battle may have started!
+- Shoot your opponent’s ships by matching the coordinates.
+- You will be informed if you have hit or missed a ship.
+- Sink all 8 computer ships to win!
+
 ![playerShoot](./media/screenshot_shootplayer.png)
 
 ![playerBoards](./media/screenshot_boards.png)
