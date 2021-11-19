@@ -27,7 +27,11 @@ To place a ship you need to enter a departure coordinate (A1-J10 for the default
 
 Ships shall not overlap or be adjacent and shall remain within the boundaries of the edge.
 
-![data](./media/screenshot_playerboard.png)
+![addShips](./media/screenshot_playerboard.png)
+
+
+### Shoot the enemy ships
+![addShips](./media/screenshot_playershot.png)
 
 ### Feedback
 If you have any feedback, please reach out to us at gurzau10@gmail.com
