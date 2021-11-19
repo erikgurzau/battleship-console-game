@@ -46,6 +46,12 @@ Once both players have configured their ships, the battle may have started!
 
 ![playerBoards](./media/screenshot_boards.png)
 
+### End game
+
+![endGame](./media/screenshot_endgame.png)
+
+![playerWin](./media/screenshot_win.png)
+
 ### Feedback
 If you have any feedback, please reach out to us at gurzau10@gmail.com
 
