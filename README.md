@@ -10,4 +10,4 @@ To run the game you need to have:
 ### The Game
 When you start the game the following menu appears on the home screen
 
-![menu](./media/screenshot_menu.png)
+![menu](./media/screenshot_initmenu.png)
