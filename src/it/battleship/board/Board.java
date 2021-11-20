@@ -4,7 +4,10 @@ import it.battleship.board.exceptions.BoardException;
 import it.battleship.board.exceptions.PositionException;
 import it.battleship.ships.Ship;
 import it.battleship.ships.utils.Direction;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Board {
     private final int length; //one variable for rows = columns = 10 [10x10 matrix]
@@ -96,31 +99,50 @@ public class Board {
     }
 
     private boolean isShipAround(int row, int column) throws PositionException {
-        if (row - 1 >= 0){
-            if(thereIsShip(new Position(row - 1, column))) return true;
-        }
-        if (column - 1 >= 0){
-            if(thereIsShip(new Position(row, column - 1))) return true;
-        }
-        if (row - 1 >= 0 && column - 1 >= 0){
-            if(thereIsShip(new Position(row - 1, column - 1))) return true;
-        }
-        if (row + 1 < length && column - 1 >= 0){
-            if(thereIsShip(new Position(row + 1, column - 1))) return true;
-        }
-        if (row + 1 < length){
-            if(thereIsShip(new Position(row + 1, column))) return true;
-        }
-        if (row + 1 < length && column + 1 < length){
-            if(thereIsShip(new Position(row + 1, column + 1))) return true;
-        }
-        if (column + 1 < length){
-            if(thereIsShip(new Position(row, column + 1))) return true;
-        }
-        if (row - 1 >= 0 && column + 1 < length){
-            return thereIsShip(new Position(row - 1, column + 1));
+        ArrayList<Position> list = getAllNearPositions(row, column);
+        for (Position position: list){
+            if (at(position) == SHIP) return true;
         }
         return false;
+    }
+
+    public ArrayList<Position> getPossibleTarget(Position position) throws PositionException {
+        int row = position.getRow(), column = position.getColumn();
+        ArrayList<Position> list = new ArrayList<>();
+        //nord
+        if (row - 1 >= 0 && !thereIsMiss(new Position(row - 1, column)) && !thereIsHit(new Position(row - 1, column)))
+            list.add(new Position(row - 1, column));
+        //ovest
+        if (column - 1 >= 0 && !thereIsMiss(new Position(row, column - 1)) && !thereIsHit(new Position(row, column - 1)))
+            list.add(new Position(row, column - 1));
+        //sud
+        if (row + 1 < length && !thereIsMiss(new Position(row + 1, column)) && !thereIsHit(new Position(row + 1, column)))
+            list.add(new Position(row + 1, column));
+        //est
+        if (column + 1 < length && !thereIsMiss(new Position(row, column + 1)) && !thereIsHit(new Position(row, column + 1)))
+            list.add(new Position(row, column + 1));
+        return list;
+    }
+
+    public ArrayList<Position> getAllNearPositions(int row, int column) throws PositionException {
+        ArrayList<Position> list = new ArrayList<>();
+        //nord
+        if (row - 1 >= 0) list.add(new Position(row - 1, column));
+        //sud
+        if (row + 1 < length) list.add(new Position(row + 1, column));
+        //est
+        if (column + 1 < length) list.add(new Position(row, column + 1));
+        //ovest
+        if (column - 1 >= 0) list.add(new Position(row, column - 1));
+        //nord-est
+        if (row - 1 >= 0 && column + 1 < length) list.add(new Position(row - 1, column + 1));
+        //nord-ovest
+        if (row - 1 >= 0 && column - 1 >= 0) list.add(new Position(row - 1, column - 1));
+        //sud-est
+        if (row + 1 < length && column + 1 < length) list.add(new Position(row + 1, column + 1));
+        //sud-ovest
+        if (row + 1 < length && column - 1 >= 0) list.add(new Position(row + 1, column - 1));
+        return list;
     }
 
     public boolean addShip(Ship ship) throws BoardException, PositionException {
@@ -157,6 +179,11 @@ public class Board {
         }
         else if (thereIsWater(position)) return set(MISS, position);
         else throw new BoardException("Errore, hai già sparato in questa posizione");
+    }
+
+    public Position randPositionFromList(ArrayList<Position> list){
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
     }
 
     public Board getBoardHideShips() throws PositionException{

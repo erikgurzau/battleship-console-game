@@ -7,7 +7,7 @@ import it.battleship.player.Player;
 public class BattleshipGame {
     private final Player pOne;
     private final Player pTwo;
-    private final String COMPUTER = "CPU";
+    private final String COMPUTER = "AI";
 
 
     public BattleshipGame(String name){
@@ -21,26 +21,27 @@ public class BattleshipGame {
     }
 
     private boolean turn(Player attack, Player defend) throws PositionException {
-        Position shot = null;
+        Position shoot = null;
         boolean isHit, isAddHit;
         if (attack.hasShipsLive()){
             do {
                 try {
-                    shot = attack.shoot();
-                    isAddHit = defend.addHit(shot);
+                    shoot = attack.shoot(defend.getBoard().getBoardHideShips());
+                    isAddHit = defend.addShoot(shoot);
                 } catch (BoardException e) {
-                    if (!attack.isCPU()) Display.printError("Errore, hai già sparato in questa posizione!");
+                    if (!attack.isAI()) Display.printError("Errore, hai già sparato in questa posizione!");
                     isAddHit = false;
                 }
             } while (!isAddHit);
-            isHit = defend.getBoard().thereIsHit(shot);
-            Display.printShot(attack, shot, isHit);
+            isHit = defend.getBoard().thereIsHit(shoot);
+            if (isHit) attack.registerShoot(shoot);
+            Display.printShot(attack, shoot, isHit);
 
-            if (attack.isCPU() && defend.isCPU()) Display.printAdjacentBoard(attack, defend);
-            else if (!attack.isCPU()) Display.printAdjacentBoard(attack, defend);
-            else if (!defend.isCPU()) Display.printAdjacentBoard(defend, attack);
+            if (attack.isAI() && defend.isAI()) Display.printAdjacentBoard(attack, defend);
+            else if (!attack.isAI()) Display.printAdjacentBoard(attack, defend);
+            else if (!defend.isAI()) Display.printAdjacentBoard(defend, attack);
 
-            if (!attack.isCPU() && !defend.isCPU()) try { Thread.sleep(1000); } catch (InterruptedException e) { }
+            if (!attack.isAI() && !defend.isAI()) try { Thread.sleep(1000); } catch (InterruptedException e) { }
             return true;
         } else return false;
     }
@@ -57,7 +58,7 @@ public class BattleshipGame {
 
     public void run() throws PositionException {
         addAllShips();
-        while (turn(pOne, pTwo) && turn(pTwo, pOne)){ }
+        while (turn(pOne, pTwo) && turn(pTwo, pOne)) { }
         printResultGame();
     }
 }

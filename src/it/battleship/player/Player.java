@@ -11,32 +11,30 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
-    private final Board board;
-    private boolean isCPU;
+    private final Board board = new Board(10);
+    private final ArrayList<Position> shoots = new ArrayList<>();
+    private ArrayList<Position> nextTargets = new ArrayList<>();
+    private boolean isAI;
 
+
+    public Player(){
+        name = randName();
+        isAI = true;
+    }
 
     public Player(String name){
         this.name = name;
-        board = new Board(10);
-        isCPU = false;
+        isAI = false;
     }
 
-    public Player(String name, boolean isCPU){
+    public Player(String name, boolean isAI){
         this.name = name;
-        board = new Board(10);
-        this.isCPU = isCPU;
+        this.isAI = isAI;
     }
 
-    public Player(){
+    public Player(boolean isAI){
         this.name = randName();
-        board = new Board(10);
-        isCPU = true;
-    }
-
-    public Player(boolean isCPU){
-        this.name = randName();
-        board = new Board(10);
-        this.isCPU = isCPU;
+        this.isAI = isAI;
     }
 
     private ArrayList<Ship> initShips(){
@@ -73,16 +71,20 @@ public class Player {
         return board;
     }
 
-    public void setIsCPU(boolean CPU) {
-        isCPU = CPU;
+    public ArrayList<Position> getShoots() {
+        return shoots;
     }
 
-    public boolean isCPU(){
-        return isCPU;
+    public void setAI(boolean AI) {
+        isAI = AI;
+    }
+
+    public boolean isAI(){
+        return isAI;
     }
 
     public void addAllShips(){
-        if (!isCPU) {
+        if (!isAI) {
             boolean isAdded;
             Position position;
             Direction direction;
@@ -161,27 +163,50 @@ public class Player {
         return board.getNumShips();
     }
 
-    public boolean addHit(Position pos) throws BoardException {
-        return board.addHit(pos);
-    }
-
-     public Position randShoot() throws PositionException {
+    private Position randPosition() throws PositionException {
         Random random = new Random();
         int x = random.nextInt(board.getLength());
         int y = random.nextInt(board.getLength());
         return new Position(x, y);
     }
 
-    public Position shoot() throws PositionException {
-        if (isCPU) return randShoot();
+    public boolean addShoot(Position pos) throws BoardException {
+        return board.addHit(pos);
+    }
+
+    public Position shootAI(Board boardEnemy) throws PositionException {
+        Position lastPos, nextPos;
+        if (shoots.isEmpty()) return randPosition();
+        else {
+            lastPos = getLastShoot(); //last hit
+            nextTargets.addAll(boardEnemy.getPossibleTarget(lastPos));
+            if (nextTargets.isEmpty()) return randPosition();
+            nextPos = nextTargets.get(0);
+            nextTargets.remove(0);
+            return nextPos;
+        }
+    }
+
+    public Position shoot(Board boardEnemy) throws PositionException {
+        if (isAI) return shootAI(boardEnemy);
         else {
             Scanner sc = new Scanner(System.in);
             return Input.readPosition(sc, board,  "- " + name + ", dove vuoi sparare? ");
         }
     }
 
+    public void registerShoot(Position position){
+        shoots.add(position);
+    }
+
+    public Position getLastShoot(){
+        if (shoots.isEmpty()) return null;
+        return shoots.get(shoots.size() - 1);
+    }
+
     private void reset(){
         board.reset();
     }
+
 
 }

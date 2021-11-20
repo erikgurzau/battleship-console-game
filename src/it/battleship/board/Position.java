@@ -12,6 +12,7 @@ public class Position {
         this.row = row;
         this.column = column;
     }
+
     public Position(char row, int column) throws PositionException {
         if (row < 'a' || column < 0)
             throw new PositionException("Valori consentiti maggiori di a1");
@@ -22,6 +23,7 @@ public class Position {
     public int getRow() {
         return row;
     }
+
     public int getColumn() {
         return column;
     }
@@ -29,6 +31,7 @@ public class Position {
     public static int decode(char row) {
         return row - 'a';
     }
+
     public static char encode(int row) {
         return (char)('a' + row);
     }
