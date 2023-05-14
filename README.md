@@ -1,4 +1,4 @@
-# Battleship Console Game
+# Battleship Console Game [![HitCount](https://hits.dwyl.com/erikgurzau/battleship-console-game.svg?style=flat-square)](http://hits.dwyl.com/erikgurzau/battleship-console-game)
 This is a console-based implementation of the classic game Battleship with an improved CLI graphics system.
 
 ## Getting Started
