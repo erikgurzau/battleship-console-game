@@ -1,5 +1,5 @@
 # Battleship Console Game
-This is a console terminal implementation of the classic game Battleship with an improved CLI graphics system.
+This is a console-based implementation of the classic game Battleship with an improved CLI graphics system.
 
 ## Getting Started
 ### Prerequisites
