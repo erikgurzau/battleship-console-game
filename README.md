@@ -1,13 +1,17 @@
-![title](./media/screenshot_title.png)
-# battleship-console-terminal
-Java battleship game using console terminal with classical rules but with an improved CLI graphics system
+# Battleship Console Game
+This is a console terminal implementation of the classic game Battleship with an improved CLI graphics system.
 
+## Getting Started
+### Prerequisites
+You will need to have Java 8+ installed on your computer to run this game.
 
 ### Installation
-To run the game you need to have:
-* Versions after Java 8
+1. Clone or download this repository to your local machine.
+2. Navigate to the project directory.
+3. Compile the `Main.java` file by running the command `javac Main.java` in the terminal.
+4. Run the game by entering the command `java Main` in the terminal.
 
-### The Game
+## The Game
 When you start the game the following menu appears on the home screen
 
 ![menu](./media/screenshot_initmenu.png)
